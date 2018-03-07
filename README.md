@@ -15,6 +15,9 @@ $ minikube dashboard
 
 # Stop minikube
 $ minikube stop
+
+# Start docker registry
+$ eval $(minikube docker-env)
 ```
 
 ### Listing cluster nodes with kubectl
