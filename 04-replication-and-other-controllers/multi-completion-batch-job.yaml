@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: multi-completion-batch-job
+spec:
+  # Setting completion to 5 makes this Job running five pods sequentially
+  completions: 5
+  # Up to two pods can run in parallel
+  parallelism: 2
+  template:
+    metadata:
+      labels:
+        app: batch-job
+    spec:
+      # Job can't use the default restart policy, which is Always
+      restartPolicy: OnFailure
+      containers:
+      - name: main
+        image: luksa/batch-job
+        imagePullPolicy: IfNotPresent

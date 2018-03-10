@@ -1,0 +1,22 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: batch-job-every-fifteen-minutes
+spec:
+  schedule: "0,15,30,45 * * * *"
+  # At the latest , the pod must start running at 15 seconds
+  # past the scheduled time. Else, it will not run and will
+  # be shown as Failed.
+  startingDeadlineSeconds: 15
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: periodic-batch-job
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: main
+            image: luksa-batch-job
+            imagePullPolicy: IfNotPresent
