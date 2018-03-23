@@ -1,6 +1,11 @@
 # kubernetes-in-action
 From the book Kubernetes in Action
 
+## Installation
+
+```ash
+$ brew install kubectl
+```
 
 ## Chapter 02 - First steps with Docker and Kubernetes
 
