@@ -76,3 +76,32 @@ Events:  <none>
 $ kubectl create -f fortune-pod-configmap.yml
 pod "fortune" created
 ```
+
+## Options
+
+```bash
+$ kubectl create configmap my-config \
+  --from-file=foo.json \        # A single file
+  --from-file=bar=foobar.conf \ # A file stored under a custom key
+  --from-file=config-opts/ \    # A whole directory
+  --from-literal=some=thing     # A literal value
+```
+
+## envFrom
+
+```yml
+spec:
+  containers:
+  - image: some-image
+    envFrom: 
+    - prefix: CONFIG_
+      configMapRef:
+        name: my-config-map
+```
+
+## Editing Configmap
+
+```bash
+$ kubectl edit configmap fortune-config
+```
+
