@@ -18,6 +18,14 @@ $ sudo mv ./kubectl /usr/local/bin/kubectl
 $ curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.25.2/minikube-darwin-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
 ```
 
+## Delete
+
+```bash
+$ minikube delete
+$ rm /usr/local/minikube
+$ rm -rf ~/.minikube
+```
+
 ## Setting Alias
 
 ```bash
@@ -38,7 +46,7 @@ $
 # Start minikube
 $ minikube start
 
-$ minikube start --bootstrapper kubeadm --kubernetes-version v1.9.3 --memory 4096 --extra-config=apiserver.Authorization.Mode=RBAC
+$ minikube start --kubernetes-version v1.9.4 --memory 4096 --extra-config=apiserver.Authorization.Mode=RBAC
 
 # View dashboard:
 $ minikube dashboard
