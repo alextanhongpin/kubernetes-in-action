@@ -38,6 +38,8 @@ $
 # Start minikube
 $ minikube start
 
+$ minikube start --bootstrapper kubeadm --kubernetes-version v1.9.3 --memory 4096 --extra-config=apiserver.Authorization.Mode=RBAC
+
 # View dashboard:
 $ minikube dashboard
 
