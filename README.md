@@ -6,6 +6,14 @@ From the book Kubernetes in Action
 ```bash
 $ brew install kubectl
 
+# or
+$ curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.10.0/bin/darwin/amd64/kubectl
+# Make it executable
+$ chmod +x ./kubectl
+# Move it to path
+$ sudo mv ./kubectl /usr/local/bin/kubectl
+
+
 # Installing minikube
 $ curl -Lo minikube https://storage.googleapis.com/minikube/releases/v0.25.2/minikube-darwin-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
 ```
