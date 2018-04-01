@@ -35,7 +35,8 @@ $ alias k=kubectl
 ## Setting Autocomplete
 
 ```bash
-$ 
+$ brew install bash-completion@2
+$ source <(kubectl completion zsh)
 ```
 
 ## Chapter 02 - First steps with Docker and Kubernetes
