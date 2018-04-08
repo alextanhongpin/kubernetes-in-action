@@ -1,0 +1,77 @@
+# ClusterRoles and ClusterRoleBindings
+
+## Allow Access to Cluster-Level Resources
+
+Allow pods to list PersistentVolumes:
+
+```bash
+$ kubectl create clusterrole pv-reader --verb=get,list --resource=persistentvolumes
+clusterrole.rbac.authorization.k8s.io "pv-reader" created
+```
+
+## View ClusterRole definition
+
+```bash
+$ kubectl get clusterrole pv-reader -o yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  creationTimestamp: 2018-04-08T14:41:31Z
+  name: pv-reader
+  resourceVersion: "6145"
+  selfLink: /apis/rbac.authorization.k8s.io/v1/clusterroles/pv-reader
+  uid: edd99df3-3b3a-11e8-9d1e-080027dde860
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - persistentvolumes
+  verbs:
+  - get
+  - list
+```
+
+Try calling the api:
+
+```bash
+$ kubectl exec -it test-d8578bdc9-nzk2l -n foo sh
+
+# The call will fail, since we have not created a clusterrolebindings
+$ curl localhost:8001/api/v1/persistentvolumes
+{
+  "kind": "Status",
+  "apiVersion": "v1",
+  "metadata": {
+
+  },
+  "status": "Failure",
+  "message": "persistentvolumes is forbidden: User \"system:serviceaccount:foo:default\" cannot list persistentvolumes at the cluster scope",
+  "reason": "Forbidden",
+  "details": {
+    "kind": "persistentvolumes"
+  },
+  "code": 403
+}
+```
+
+## Create ClusterRoleBindings
+
+```bash
+$ kubectl create clusterrolebinding pv-test --clusterrole=pv-reader --serviceaccount=foo:default
+clusterrolebinding.rbac.authorization.k8s.io "pv-test" created
+```
+
+Call the api again:
+
+```bash
+/# $ curl localhost:8001/api/v1/persistentvolumes
+{
+  "kind": "PersistentVolumeList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/persistentvolumes",
+    "resourceVersion": "6448"
+  },
+  "items": []
+}/
+```

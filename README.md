@@ -49,6 +49,9 @@ $ minikube start
 
 $ minikube start --kubernetes-version v1.9.4 --memory 4096 --extra-config=apiserver.Authorization.Mode=RBAC
 
+# Re-enable RBAC
+$ kubectl delete clusterrolebinding permissive-binding
+
 # View dashboard:
 $ minikube dashboard
 
