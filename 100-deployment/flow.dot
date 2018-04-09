@@ -1,0 +1,4 @@
+digraph G {
+	node [shape = box]
+	"Start Minikube" -> "Create Namespace" -> "Create the Secret" -> "Create the Service Accounts" -> "Create the Roles" -> "Create the Cluster Roles" -> "Create the Role Bindings" -> "Create the ClusterRole Bindings" -> "Create the Deployment" -> "Create the Service"
+}
